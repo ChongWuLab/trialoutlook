@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Benchmark · TrialOutlook</title>
-  <meta name="description" content="The 5,809 ongoing trials of the prospective benchmark, open for forecasts before their readouts.">
+  <meta name="description" content="The 5,809 trials of the prospective benchmark; 5,339 are open for forecasts before their readouts.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z' fill='%23C96442'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,13 +18,16 @@
 
   <section class="wrap pagehead">
     <div class="eyebrow">Prospective benchmark</div>
-    <h1><span id="b-n">5,809</span> ongoing trials, open for forecasts</h1>
+    <h1><span id="b-n">5,809</span> trials, <span id="b-open">5,339</span> open for forecasts</h1>
     <p class="lede">The benchmark covers the eligible ongoing trials of companies listed in the United States, including
       trials without an announced readout date. Forecasts for every trial were recorded before outcome disclosure and stay
       fixed as outcomes accumulate. The trial list is public so that any method can be scored on the same trials as outcomes
       are adjudicated.</p>
+    <p class="lede">The 470 trials whose outcome was first disclosed before 5 November 2026 are closed. The other 5,339
+      trials are open for forecasts.</p>
     <div class="btns">
       <a class="btn primary" href="downloads/trialoutlook_benchmark_5809_trials.csv" download>Download the trial list (CSV)</a>
+      <a class="btn ghost" href="downloads/trialoutlook_benchmark_closed_470_nct_ids.csv" download>Closed trials: 470 NCT IDs (CSV)</a>
       <a class="btn ghost" href="contribute.html">How to submit forecasts</a>
     </div>
   </section>
@@ -57,7 +60,7 @@
             precision and classification errors, and by Brier score and expected calibration error for probability
             forecasts. Updates include uncertainty estimates, forecast coverage and the numbers of adjudicated, unresolved
             and pending trials. Original forecasts remain fixed as outcomes accumulate.</li>
-          <li><b>Your forecasts.</b> Submit for any subset of trials while they are pending; see
+          <li><b>Your forecasts.</b> Submit for any subset of the open trials; see
             <a href="contribute.html">Contribute</a>.</li>
         </ul>
       </div>
@@ -76,12 +79,14 @@
     <div id="grid"></div>
     <p class="note">Company: US listed lead sponsor or collaborator at cohort assembly (American depositary receipts and
       subsidiaries mapped to the listed parent). Phase: ClinicalTrials.gov phase at cohort assembly. Drug, drug targets
-      (target genes) and disease: from the TrialDossier evidence dossier.</p>
+      (target genes) and disease: from the TrialDossier evidence dossier. Status: closed if the outcome (a final readout,
+      a termination or withdrawal, or discontinuation of the programme) was first disclosed before 5 November 2026;
+      interim data do not close a trial.</p>
   </section>
 
   <div id="site-footer"></div>
   <script src="https://unpkg.com/tabulator-tables@5.6.1/dist/js/tabulator.min.js"></script>
   <script src="js/common.js?v=25"></script>
-  <script src="js/benchmark.js?v=23"></script>
+  <script src="js/benchmark.js?v=24"></script>
 </body>
 </html>

@@ -1,12 +1,14 @@
 name: Forecast submission
-description: Submit forecasts for pending trials of the 5,809 trial prospective benchmark.
+description: Submit forecasts for the 5,339 open trials of the 5,809 trial prospective benchmark.
 title: "Forecast submission: "
 labels: ["submission"]
 body:
   - type: markdown
     attributes:
       value: |
-        Forecasts are scored only for trials that were still pending when this submission was recorded.
+        Only the 5,339 open trials are accepted (list: downloads/trialoutlook_benchmark_open_5339_nct_ids.csv); rows for
+        the 470 closed trials are not stored. Forecasts are scored only for trials that were still pending when this
+        submission was recorded.
         The submission time is the time this issue is opened (or last edited). An automatic check replies within a few
         minutes; accepted files are stored in the `submissions` folder of this repository with their recorded time.
   - type: input
@@ -33,7 +35,7 @@ body:
         Columns: nct_id, p_success (0 to 1), model_name, generated_at (YYYY-MM-DD), one row per trial.
       placeholder: |
         nct_id,p_success,model_name,generated_at
-        NCT00223145,0.82,my_model_v1,2026-11-01
+        NCT00329043,0.82,my_model_v1,2026-11-20
     validations:
       required: true
   - type: textarea

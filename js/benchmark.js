@@ -1,10 +1,11 @@
 // TrialOutlook benchmark: the 5,809 trials of the prospective benchmark as a table, one tab per phase,
-// with a search box under every column heading.
+// with a search box under every column heading and a status filter (open or closed at the 5 November 2026 cutoff).
 
 (async function () {
   const B = await loadJSON("data/benchmark.json");
   document.getElementById("b-n").textContent = B.n.toLocaleString();
-  const rows = B.rows.map(([nct, company, phase, drug, targets, disease]) => ({ nct, company, phase, drug, targets, disease }));
+  document.getElementById("b-open").textContent = B.n_open.toLocaleString();
+  const rows = B.rows.map(([nct, company, phase, drug, targets, disease, status]) => ({ nct, company, phase, drug, targets, disease, status }));
   const label = (p) => (p === "Early 1" ? "Early phase 1" : "Phase " + p);
 
   // phase tabs with counts
@@ -26,8 +27,10 @@
       { title: "Phase", field: "phase", width: 96, headerFilter: "input", headerFilterPlaceholder: "Search",
         sorter: (a, b) => B.phases.indexOf(a) - B.phases.indexOf(b) },
       wrapCol("Drug", "drug", 200),
-      wrapCol("Drug targets", "targets", 190),
-      wrapCol("Disease", "disease", 230),
+      wrapCol("Drug targets", "targets", 180),
+      wrapCol("Disease", "disease", 200),
+      { title: "Status", field: "status", width: 100, headerFilter: "list", headerFilterFunc: "=",
+        headerFilterParams: { values: ["Open", "Closed"], clearable: true }, headerFilterPlaceholder: "All" },
     ],
   });
 

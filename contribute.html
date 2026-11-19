@@ -21,7 +21,7 @@
       minutes, records the submission time and stores accepted forecasts in the public repository.</p>
     <div class="btns">
       <a class="btn primary" data-site-link="submit" href="#" target="_blank" rel="noopener">Open the submission form</a>
-      <a class="btn ghost" href="downloads/trialoutlook_benchmark_5809_nct_ids.csv" download>Download the NCT IDs (CSV)</a>
+      <a class="btn ghost" href="downloads/trialoutlook_benchmark_open_5339_nct_ids.csv" download>Download the 5,339 open NCT IDs (CSV)</a>
     </div>
     <p class="note">The form is a GitHub issue form, so a free GitHub account is needed. Attach the CSV by dragging it into
       the form; the reply on the issue says whether it was accepted and, if not, what to fix.</p>
@@ -33,17 +33,19 @@
       <p>One CSV per model, one row per trial you want scored.</p>
       <div class="scroll"><table class="t">
         <tr><th>Column</th><th>Type</th><th>Description</th></tr>
-        <tr><td><code>nct_id</code></td><td>string</td><td>Trial identifier from the <a href="benchmark.html">benchmark list</a>, for example NCT00223145</td></tr>
+        <tr><td><code>nct_id</code></td><td>string</td><td>Identifier of an open trial in the <a href="benchmark.html">benchmark list</a>, for example NCT00329043</td></tr>
         <tr><td><code>p_success</code></td><td>float, 0 to 1</td><td>Predicted probability that the trial reads out as a success</td></tr>
         <tr><td><code>model_name</code></td><td>string</td><td>Short stable name for your method, the same in every row and in the form</td></tr>
         <tr><td><code>generated_at</code></td><td>ISO date</td><td>When the forecasts were produced</td></tr>
       </table></div>
       <pre>nct_id,p_success,model_name,generated_at
-NCT00223145,0.82,my_model_v1,2026-11-01
-NCT00223171,0.44,my_model_v1,2026-11-01</pre>
+NCT00329043,0.82,my_model_v1,2026-11-20
+NCT00796263,0.44,my_model_v1,2026-11-20</pre>
 
       <h2>Rules</h2>
       <ul>
+        <li><b>Open trials only.</b> The 470 trials whose outcome was first disclosed before 5 November 2026 are closed;
+          rows for closed trials are not stored. The other 5,339 trials are open.</li>
         <li><b>Record before readout.</b> Only forecasts submitted while a trial is still pending are scored for that trial.
           The submission time is the time the submission form (a GitHub issue) was opened, or last edited, as recorded by GitHub.</li>
         <li><b>No edits after readout.</b> You may update forecasts for pending trials; a trial's forecast is frozen at its

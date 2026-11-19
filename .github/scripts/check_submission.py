@@ -9,6 +9,8 @@ from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 BENCH = os.path.join(ROOT, "downloads", "trialoutlook_benchmark_5809_nct_ids.csv")
+# Trials whose outcome was first disclosed before 5 November 2026: rows for them are skipped, not stored.
+CLOSED = os.path.join(ROOT, "downloads", "trialoutlook_benchmark_closed_470_nct_ids.csv")
 OUT = os.path.join(ROOT, "check")
 MAX_BYTES = 10 * 1024 * 1024
 URL_RE = re.compile(r"https://github\.com/(?:user-attachments/files/\d+/[^\s)\]]+|[\w.-]+/[\w.-]+/files/\d+/[^\s)\]]+)")
@@ -71,7 +73,8 @@ def main():
             errors.append("Missing columns: " + ", ".join(missing) + ". Required: " + ", ".join(COLS) + ".")
         else:
             bench = {r["nct_id"] for r in csv.DictReader(open(BENCH, encoding="utf-8"))}
-            seen, models = set(), set()
+            closed = {r["nct_id"] for r in csv.DictReader(open(CLOSED, encoding="utf-8"))}
+            seen, models, skipped = set(), set(), []
             for k, r in enumerate(reader, start=2):
                 r = {(a or "").strip(): (b or "").strip() for a, b in r.items() if a}
                 nct, p, model, gen = r.get("nct_id", ""), r.get("p_success", ""), r.get("model_name", ""), r.get("generated_at", "")
@@ -91,10 +94,19 @@ def main():
                 if not model: bad.append("model_name is empty")
                 if bad:
                     errors.append(f"Row {k}: " + "; ".join(bad))
+                elif nct in closed:
+                    seen.add(nct); models.add(model); skipped.append(nct)
                 else:
                     seen.add(nct); models.add(model)
                     rows.append([nct, f"{float(p):g}", model, gen])
-            if not rows and not errors: errors.append("The CSV has no forecast rows.")
+            if skipped and rows:
+                notes.append((f"{len(skipped)} rows were" if len(skipped) > 1 else "1 row was") +
+                             " for closed trials (outcome first disclosed before 5 November 2026) and not stored: " +
+                             ", ".join(skipped[:10]) + (", ..." if len(skipped) > 10 else "") + ".")
+            if not rows and not errors:
+                errors.append("Every row is for a closed trial (outcome first disclosed before 5 November 2026); only open "
+                              "trials are accepted, see downloads/trialoutlook_benchmark_open_5339_nct_ids.csv."
+                              if skipped else "The CSV has no forecast rows.")
             if len(models) > 1: errors.append("model_name must be the same in every row (found " + ", ".join(sorted(models)) + ").")
             if method and models and method not in models:
                 errors.append(f"The method name in the form ({method}) differs from model_name in the CSV ({', '.join(sorted(models))}).")
@@ -120,7 +132,7 @@ def main():
             if new: w.writerow(["recorded_at_utc", "issue", "model_name", "trials", "file"])
             w.writerow([stamp, number, model, len(rows), rel])
         msg = ["**Submission check: accepted.**", "",
-               f"- Method: `{model}`", f"- Forecasts: {len(rows):,} benchmark trials",
+               f"- Method: `{model}`", f"- Forecasts: {len(rows):,} open benchmark trials",
                f"- Recorded at: {stamp} (UTC)", f"- Stored as: `{rel}`", "",
                "Each trial is scored only if its outcome was first disclosed after the recorded time. Results are released on "
                "the last day of each month."] + ([""] + [f"- {n}" for n in notes] if notes else [])

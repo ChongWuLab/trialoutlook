@@ -10,7 +10,10 @@ A prospective benchmark for clinical trial outcome forecasts.
   0.819 (95% CI 0.708 to 0.914), average precision 0.860; at 0.5 it identified 27 of 29 failures and classified 17 of 40
   successes as failures.
 - **Prospective benchmark of 5,809 ongoing trials** of US listed companies, with forecasts recorded before outcome
-  disclosure. The trial list is public; anyone can submit forecasts for pending trials (see the Contribute page).
+  disclosure. The trial list is public; anyone can submit forecasts for the open trials (see the Contribute page).
+  The 470 trials whose outcome was first disclosed before 5 November 2026 are closed
+  (`downloads/trialoutlook_benchmark_closed_470_nct_ids.csv`); the other 5,339 are open
+  (`downloads/trialoutlook_benchmark_open_5339_nct_ids.csv`).
 - **Prespecified adjudication**: trials are classified by whether the reported results satisfy the prespecified criteria
   for the primary endpoints; trials terminated before completion are failures unless attainment of the primary endpoint
   has been reported; everything else stays unresolved. Every label links its primary source.
@@ -30,7 +33,8 @@ css/          styling
 js/config.js  deployment config: site name, domain, repo, paper (edit here only)
 js/           page logic
 data/         compact JSON consumed by the pages
-downloads/    the 69 adjudicated readouts (CSV) and the benchmark NCT IDs (CSV)
+downloads/    the 69 adjudicated readouts (CSV), the benchmark trial list with status, and the NCT IDs of all,
+              closed and open benchmark trials (CSV)
 submissions/  accepted forecast CSVs, stored by the automatic check of the submission form
 .github/      submission issue form and the workflow that checks and stores submissions
 ```
