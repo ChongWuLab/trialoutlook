@@ -41,7 +41,8 @@ submissions/  accepted forecast CSVs, stored by the automatic check of the submi
 
 ## Citation
 
-The accompanying manuscript is in preparation; a citation and link will appear here and on the site once public.
+Xu J, Zhang W, Yuan Y, Wu C. Prospective prediction of clinical trial outcomes from public evidence.
+medRxiv 2026.11.17.26368242 (2026). https://doi.org/10.64898/2026.11.17.26368242
 
 ## Disclaimer
 

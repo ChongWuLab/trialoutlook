@@ -5,8 +5,9 @@
   document.getElementById("paper-cite").textContent = S.paper.citation;
   if (S.paper.status === "published") {
     document.getElementById("paper-tag").remove();
-    document.getElementById("paper-note").innerHTML = S.paper.url
-      ? `<a href="${S.paper.url}" target="_blank" rel="noopener">${S.paper.url}</a>` : "";
+    document.getElementById("paper-note").remove();
+    if (S.paper.url) document.getElementById("paper-btns").insertAdjacentHTML("afterbegin",
+      `<a class="btn primary" href="${S.paper.url}" target="_blank" rel="noopener">Read on medRxiv</a>`);
   }
 
   const [R, rows] = await Promise.all([loadJSON("data/results.json"), loadJSON("data/readouts.json")]);

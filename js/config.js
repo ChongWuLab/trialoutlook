@@ -25,11 +25,11 @@ window.SITE = {
   // Data cut of the results shown on the site (the paper's data cut).
   snapshotDate: "2026-10-20",
 
-  // -------- Paper (PLACEHOLDER — replace when public) --------
+  // -------- Paper --------
   paper: {
-    status: "placeholder", // set to "published" once citation/url are real
-    citation: "An AI system and live benchmark for prospective clinical trial forecasting. " +
-              "Manuscript in preparation, 2026.",
-    url: "" // DOI or preprint link once available
+    status: "published",
+    citation: "Xu J, Zhang W, Yuan Y, Wu C. Prospective prediction of clinical trial outcomes " +
+              "from public evidence. medRxiv 2026.11.17.26368242 (2026).",
+    url: "https://www.medrxiv.org/content/10.64898/2026.11.17.26368242v1"
   }
 };
